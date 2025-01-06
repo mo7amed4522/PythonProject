@@ -1,0 +1,163 @@
+<odoo>
+    <record id="property_view_action" model="ir.ui.view">
+        <field name="name">property tree</field>
+        <field name="model">property</field>
+        <field name="arch" type ="xml">
+            <list class="header_custom" decoration-danger="(is_late)">
+                <header>
+                    <button
+                        name="property_xlsx_report"
+                        type="object"
+                        string="Print Excel Report"
+                        class="btn-primary"
+                    />
+                </header>
+                <field name="name"/>
+                <field name="expire_price"/>
+                 <field name="description"/>
+                 <field name="is_late" invisible="1"/>
+                <field name = "owner_id"/>
+                <field name = "expected_date"/>
+                 <field name="area"/>
+                 <field name="expected_price"/>
+                 <field name="diff"/>
+            </list>
+        </field>
+    </record>
+    <record id = "property_view_form" model="ir.ui.view">
+        <field name = "name">property.view</field>
+        <field name="model">property</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <!--
+                    This is for smart button
+                    -->
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                        name="action_open_related_owner"
+                        type="object"
+                        class="btn btn-primary"
+                        string="Show User"
+                        icon="fa-user"
+                        invisible="not owner_id"
+                        />
+                    </div>
+                    <widget name="web_ribbon" title="SOLD" bg_color="text-bg-success" invisible="state != 'sold'"/>
+                    <header>
+                        <button name="action_draft" type="object" class="btn-primary" string="Set To Draft" invisible="state in ('draft','closed')"/>
+                        <button name="action_pending" type="object" class="btn-sec" string="Pending" invisible="state != 'draft'"/>
+                        <button name="action_sold" type="object" class="btn-success" string="Sold" invisible="state != 'pending'"/>
+                        <field name ="state" widget="statusbar"/>
+                    </header>
+                    <div class ="oe_title">
+                        <label for="ref"/>
+                        <h1>
+                            <field name = "ref"/>
+                        </h1>
+                        <label for="name"/>
+                        <h3>
+                            <field name ="name" readonly="state in ('closed')"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group string="General Information">
+                            <field name = "expire_price" readonly="state in ('closed')" />
+                            <field name = "owner_id" readonly="state in ('closed')"/>
+                        </group>
+                        <group string="Additional Information">
+                            <field name="description" readonly="state in ('closed')"/>
+                            <field name="area" readonly="state in ('closed')"/>
+                            <field name="expected_price" readonly="state in ('closed')"/>
+                            <field name="area_oration" readonly="state in ('closed')"/>
+                            <field name="expected_date"  readonly="state in ('closed')"/>
+                            <field name="diff" readonly="state in ('closed')"/>
+                            <field name = "tag_ids" widget="many2many_tags" readonly="state in ('closed')"/>
+                        </group>
+                        <notebook>
+                            <page string="area">
+                                <field name="line_ids">
+                                    <list editable="bottom">
+                                        <field name="description" />
+                                        <field name="area" />
+                                        <field name="side"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+                <chatter class="oe_chatter">
+                    <field name = "message_follower_ids"/>
+                    <field name = "activity_ids"/>
+                    <field name = "message_ids"/>
+                </chatter>
+            </form>
+        </field>
+    </record>
+    <record id="property_view_search" model="ir.ui.view">
+        <field name="name">property.search</field>
+        <field name="model">property</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="expire_price"/>
+                <!--
+                    <filter name ="is_area" string="with area" domain="[('area','=','True')]"/>
+                -->
+            </search>
+        </field>
+    </record>
+    <!-- SERVER RECORD FOR CLOSED ACTION -->
+    <record id="property_closed_server_action" model="ir.actions.server">
+        <field name="name">Closed</field>
+        <field name="model_id" ref="model_property"/>
+        <field name="binding_model_id" ref="model_property"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+            records.action_closed()
+        </field>
+    </record>
+    <!-- SERVER RECORD FOR WIZARD ACTION -->
+    <record id="property_wizard_server_action" model="ir.actions.server">
+        <field name="name">Wizard</field>
+        <field name="model_id" ref="model_property"/>
+        <field name="binding_model_id" ref="model_property"/>
+        <field name="state">code</field>
+        <field name="code">
+            action=records.change_wizard_state()
+        </field>
+    </record>
+
+    <!--
+     CHECK END DATE TO MARK LIST WITH RED COLOR
+     -->
+    <data>
+        <record id="check_selling_date_cron" model="ir.cron">
+            <field name="name">Property: Check selling date</field>
+            <field name="model_id" ref="model_property"/>
+            <field name="state">code</field>
+            <field name="code">model.check_expected_date()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+
+    <record id="property_action" model="ir.actions.act_window">
+        <field name="name">property</field>
+        <field name="res_model">property</field>
+    </record>
+    <menuitem id="property_menu_item" name="Properties" parent="property_menu" action="property_action"/>
+    <record id="list_view_action" model="ir.actions.client">
+        <field name="name">property List View</field>
+        <field name="tag">app_one.action_list_view</field>
+    </record>
+    <menuitem
+        id="property_list_view_item"
+        name="Property List View"
+        parent="property_menu"
+        action="list_view_action"
+    />
+</odoo>

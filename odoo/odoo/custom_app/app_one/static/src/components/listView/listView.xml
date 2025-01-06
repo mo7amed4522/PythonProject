@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="app_one.ListView">
+        <h1>We are here</h1>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>expire_price</th>
+                        <th>description</th>
+                        <th>owner_id</th>
+                        <th>expected_date</th>
+                        <th>area</th>
+                        <th>expected_price</th>
+                        <th>diff</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</templates>

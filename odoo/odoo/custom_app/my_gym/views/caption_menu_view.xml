@@ -1,0 +1,12 @@
+<odoo>
+    <record id="caption_gym_action" model="ir.actions.act_window">
+        <field name="name">Caption Menu</field>
+        <field name="res_model">caption.menu</field>
+    </record>
+    <menuitem
+            id="caption_gym_menu_item"
+            name="Caption Property"
+            parent="my_gym_cap_menu"
+            action="caption_gym_action"
+    />
+</odoo>

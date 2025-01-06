@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record model="ir.sequence" id="gym_sequence">
+            <field name="name">Gap Sequence</field>
+            <field name="code">cap_sequence</field>
+            <field name="prefix">CA</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

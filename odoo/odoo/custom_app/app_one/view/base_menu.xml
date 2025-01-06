@@ -1,0 +1,6 @@
+<odoo>
+    <menuitem id = "real_estate_root_menu" name = "Khaled Mohamed" web_icon="app_one,static/description/icon.png"/>
+    <menuitem id = "property_menu" name="Properties" parent = "real_estate_root_menu"/>
+    <menuitem id = "configration_menu" name="Configration" parent = "real_estate_root_menu" />
+    <menuitem id = "archive_menu" name="Archive" parent = "real_estate_root_menu"/>
+</odoo>
