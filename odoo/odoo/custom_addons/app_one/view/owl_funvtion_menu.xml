@@ -1,0 +1,13 @@
+<odoo>
+
+    <record id="action_owl_functions" model="ir.actions.client">
+        <field name="name">OWL Functions</field>
+        <field name="tag">app_one.action_login_page</field>
+    </record>
+    <menuitem
+        id = "owl_functions_menu_item"
+        name = "OWL Functions"
+        parent = "owl_functions_menu"
+        action="action_owl_functions"
+    />
+</odoo>

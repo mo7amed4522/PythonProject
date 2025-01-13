@@ -1,0 +1,16 @@
+<odoo>
+    <template id="website.homepage" name="Homepage">
+    <t t-call="website.layout">
+
+        <!-- Variables -->
+        <t t-set="additional_title" t-value="'Home'" />
+
+        <div id="wrap" class="oe_structure oe_empty">
+
+            <!-- Content -->
+
+        </div>
+
+    </t>
+</template>
+</odoo>

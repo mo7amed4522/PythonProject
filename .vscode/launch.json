@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "name": "Launch Odoo",
+          "type": "python",
+          "request": "launch",
+          "program": "/home/mo7amed/PycharmProjects/PythonProject/odoo/odoo-bin",
+          "args": [
+              "--config=/home/mo7amed/PycharmProjects/PythonProject/odoo/odoo.conf"
+          ],
+          "console": "integratedTerminal"
+      }
+  ]
+}

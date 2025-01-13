@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Run Odoo",
+        "type": "shell",
+        "command": "python3",
+        "args": [
+          "/home/mo7amed/PycharmProjects/PythonProject/odoo/odoo-bin",
+          "--config=/home/mo7amed/PycharmProjects/PythonProject/odoo/odoo.conf"
+        ],
+        "problemMatcher": [],
+        "group": "build",
+        "isBackground": true
+      }
+    ]
+  }
+  

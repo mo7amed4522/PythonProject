@@ -1,0 +1,80 @@
+<odoo>
+    <record id="building_view_action" model="ir.ui.view">
+        <field name="name">building tree</field>
+        <field name="model">building</field>
+        <field name="arch" type ="xml">
+            <list class="header_custom">
+                <field name="no"/>
+                <field name="address"/>
+                <field name = "state"/>
+                <field name="description"/>
+                <field name="country"/>
+                <field name="floors"/>
+                <field name="active" optional="1"/>
+                <field name="total_units" optional="1"/>
+                <field name="zipcode" optional="1"/>
+            </list>
+        </field>
+    </record>
+    <record id = "building_view_form" model="ir.ui.view">
+        <field name = "name">building.view</field>
+        <field name="model">building</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                  <!--  <header>
+                        <button name="action_draft" type="object" class="btn-primary" string="Set To Draft" invisible="state == 'draft'"/>
+                        <button name="action_pending" type="object" class="btn-sec" string="Pending" invisible="state != 'draft'"/>
+                        <button name="action_sold" type="object" class="btn-success" string="Sold" invisible="state != 'pending'"/>
+                        <field name ="state" widget="statusbar"/>
+                    </header>
+                  -->
+                    <div class ="oe_title">
+                        <label for="no"/>
+                        <h1>
+                            <field name = "no"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="General Information">
+                            <field name="address"/>
+                            <field name = "state"/>
+                            <field name="description"/>
+                        </group>
+                        <group string="Additional Information">
+                            <field name="country"/>
+                            <field name="floors"/>
+                            <field name="total_units" />
+                            <field name="zipcode" />
+                            <field name="active" />
+                        </group>
+
+                    </group>
+                </sheet>
+                <chatter class="oe_chatter">
+                    <field name = "message_follower_ids"/>
+                    <field name = "activity_ids"/>
+                    <field name = "message_ids"/>
+                </chatter>
+            </form>
+        </field>
+    </record>
+    <record id="building_view_search" model="ir.ui.view">
+        <field name="name">building.search</field>
+        <field name="model">building</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="no"/>
+                <field name="address"/>
+                <!--
+                    <filter name ="is_area" string="with area" domain="[('area','=','True')]"/>
+                -->
+            </search>
+        </field>
+    </record>
+    <record id="building_action" model="ir.actions.act_window">
+        <field name="name">building</field>
+        <field name="res_model">building</field>
+    </record>
+    <menuitem id="building_menu_item" name="Building" parent="property_menu" action="building_action"/>
+</odoo>
